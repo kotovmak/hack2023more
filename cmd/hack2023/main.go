@@ -23,17 +23,6 @@ func main() {
 		log.Print(err)
 	}
 
-	// ctx := context.Background()
-	// opt := option.WithCredentialsFile(config.FireBaseFile)
-	// app, err := firebase.NewApp(ctx, nil, opt)
-	// if err != nil {
-	// 	log.Print(err)
-	// }
-	// push, err := app.Messaging(ctx)
-	// if err != nil {
-	// 	log.Print(err)
-	// }
-
 	srv := server.NewServer(store, config)
 
 	if err := srv.Start(config); err != nil && err != http.ErrServerClosed {

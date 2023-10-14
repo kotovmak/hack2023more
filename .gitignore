@@ -9,3 +9,4 @@ cmd/.DS_Store
 public/assets
 node_modules
 open*.json
+__pycache__

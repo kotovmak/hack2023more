@@ -67,7 +67,6 @@ func (s *server) typelistFilter(c echo.Context) error {
 		}
 		if ok {
 			v.Load = "middle"
-			v.Rating = 4.9
 			minO = append(minO, v)
 		}
 	}
@@ -108,10 +107,16 @@ func (s *server) typelistFilter(c echo.Context) error {
 		}
 		if ok {
 			v.Load = "low"
-			v.Rating = 4.7
 			minA = append(minA, v)
 		}
 	}
+
+	minO, err = s.RunOfficePredict(c.Request().Context(), minO)
+	if err != nil {
+		log.Print(err)
+		return c.String(http.StatusInternalServerError, err.Error())
+	}
+
 	tl := model.TypeList{
 		TotalAtms:    len(minA),
 		TotalOffices: len(minO),
