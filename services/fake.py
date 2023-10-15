@@ -19,10 +19,10 @@ df['queue'] = np.random.randint(1, 12, nrow)
 df['datetime'] = [fake.date_time_between(
     start_date=datetime(2023, 9, 13),
     end_date=datetime(2023, 10, 13)
-    ).strftime('%m/%d/%Y %I:%M ')
+    ).strftime('%Y-%m-%d %I:%M')
     for _ in range(nrow)]
 
-df.to_csv("predict/data/queue.csv", index=False)
+df.to_csv("services/predict/data/queue.csv", index=False)
 
 
 
@@ -45,6 +45,6 @@ df2['datetime'] = [fake.date_time_between(
     ).strftime('%m/%d/%Y %I:%M ')
     for _ in range(nrow)]
 
-df2.to_csv("predict/data/offices_ratings.csv", index=False)
+df2.to_csv("services/predict/data/offices_ratings.csv", index=False)
 
 

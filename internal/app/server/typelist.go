@@ -111,10 +111,12 @@ func (s *server) typelistFilter(c echo.Context) error {
 		}
 	}
 
-	minO, err = s.RunOfficePredict(c.Request().Context(), minO)
-	if err != nil {
-		log.Print(err)
-		return c.String(http.StatusInternalServerError, err.Error())
+	if len(minO) > 0 {
+		minO, err = s.RunOfficePredict(c.Request().Context(), minO)
+		if err != nil {
+			log.Print(err)
+			return c.String(http.StatusInternalServerError, err.Error())
+		}
 	}
 
 	tl := model.TypeList{

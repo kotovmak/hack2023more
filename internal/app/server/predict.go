@@ -16,7 +16,7 @@ import (
 
 func (s *server) RunOfficePredict(ctx context.Context, o []model.Office) ([]model.Office, error) {
 	_, filename, _, _ := runtime.Caller(1)
-	file, err := os.Create(path.Join(path.Dir(filename), "../../../services/predict/data/offices.csv"))
+	file, err := os.Create("/home/bitrix/www/hack2023/services/predict/data/offices.csv")
 	if err != nil {
 		log.Println(path.Dir(filename))
 		return o, err
@@ -42,7 +42,7 @@ func (s *server) RunOfficePredict(ctx context.Context, o []model.Office) ([]mode
 	log.Printf("[WORKER] Start python job")
 	c := exec.Command(
 		"python3",
-		path.Join(path.Dir(filename), "../../../services/predict/offices.py"),
+		"/home/bitrix/www/hack2023/services/predict/offices.py",
 	)
 
 	if err := c.Run(); err != nil {
@@ -50,8 +50,9 @@ func (s *server) RunOfficePredict(ctx context.Context, o []model.Office) ([]mode
 		return o, err
 	}
 
-	localFile, err := os.ReadFile(path.Join(path.Dir(filename), "../../../services/predict/data/office_prediction.json"))
+	localFile, err := os.ReadFile("/home/bitrix/www/hack2023/services/predict/data/office_prediction.json")
 	if err != nil {
+		log.Println(path.Join(path.Dir(filename), "../../../services/predict/office_prediction.json"))
 		return o, err
 	}
 
